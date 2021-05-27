@@ -19,8 +19,16 @@
        user {{ fluentd_elasticsearch_user }}
        password {{ fluentd_elasticsearch_password }}
 {% endif %}
+{% if fluentd_elasticsearch_logstash_format is defined %}
+       logstash_format {{ fluentd_elasticsearch_logstash_format }}
+{% else %}
        logstash_format true
+{% endif %}
+{% if fluentd_elasticsearch_index_name is defined %}
+       index_name {{ fluentd_elasticsearch_index_name }}
+{% else %}
        logstash_prefix {{ kibana_log_prefix }}
+{% endif %}
        flush_interval 15s
        reconnect_on_error true
        buffer_type file
